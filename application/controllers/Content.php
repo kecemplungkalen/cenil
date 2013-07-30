@@ -73,7 +73,23 @@ class Content extends CI_Controller {
 		$dataphone = $this->Phone_model->gets();
 		if($dataphone)
 		{
-			$data['phone'] = $dataphone;
+			$tmp = false;
+			foreach($dataphone as $phn)
+			{
+				$temp = false;
+				$temp['IMEI'] = $phn->IMEI;
+				$temp['ID'] = $phn->ID; 
+				$temp['Receive'] = $phn->Receive;
+				$temp['Send'] = $phn->Send; 
+				$temp['status'] = 1; 
+				$temp['Signal'] = $phn->Signal;
+				if(strtotime($phn->TimeOut) < time())
+				{
+					$temp['status'] = 0;
+				}
+				$tmp[] = $temp;
+			}
+			$data['phone'] = $tmp;
 		}
 		return $this->load->view('content/phone_content_view',$data);
 		

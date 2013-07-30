@@ -33,41 +33,45 @@
 	    <tbody>
 	    
 		<?php if($phone){ ?>
-			<?php foreach($phone as $pn){ ?>
-				<tr data-toggle="popover" data-trigger="hover" data-html="true" data-content="<?php echo htmlspecialchars('<span class="label label-important" > Signal : '.$pn->Signal.'</span>',ENT_QUOTES);?>" data-original-title="<?php echo $pn->IMEI;?>" data-placement="top">
+			<?php for($i=0;$i < count($phone);$i++){ ?>
+				<tr>
 					<td>
-						    <?php echo $pn->ID;?>
+						    <?php echo $phone[$i]['ID'];?>
 					</td>
 					
 					<td>
-						    <?php echo $pn->IMEI;?>
+						    <?php echo $phone[$i]['IMEI'];?>
 					</td>
 					
 					<td>
-						    <?php if($pn->Send == 'yes') { ?> 
-								<span class="label laber-success"><?php echo $pn->Send;?></span>
+						    <?php if($phone[$i]['Send'] == 'yes') { ?> 
+								<span class="label laber-success"><?php echo $phone[$i]['Send'];?></span>
 						    <?php } else { ?>
-								<span class="label label-important"><?php echo $pn->Send;?></span>
+								<span class="label label-important"><?php echo $phone[$i]['Send'];?></span>
 						    <?php } ?>
 					</td>
 					<td>
-						     <?php if($pn->Receive == 'yes') { ?> 
-								<span class="label laber-success"><?php echo $pn->Send;?></span>
+						     <?php if($phone[$i]['Receive'] == 'yes') { ?> 
+								<span class="label laber-success"><?php echo $phone[$i]['Receive'];?></span>
 						    <?php } else { ?>
-								<span class="label label-important"><?php echo $pn->Send;?></span>
+								<span class="label label-important"><?php echo $phone[$i]['Receive'];?></span>
 						    <?php } ?>
 					</td>
 					
 					<td>
-						    <span class="label label-important"> Active</span>
+						    <?php if($phone[$i]['status'] == 1 ){?>
+							    <span class="label label-success"> Active</span>
+						    <?php } else { ?>
+							    <span class="label label-important">Inactive</span>
+						    <?php  } ?>
 					</td>
 					
 					<td>
-						    <?php echo $pn->Signal;?>
-					</td>
+						    <span><i class="icon-signal"></i></span> <?php echo $phone[$i]['Signal'];?>
+					</td> 
 					
 <!--					<td>
-						<a class="btn btn-mini" id="sikat_"> <?php echo $pn->ID;?>Sikat</a>
+						<a class="btn btn-mini" id="sikat_"> <?php //echo $pn->ID;?>Sikat</a>
 					</td>-->
 				</tr>
 			<?php }?>
