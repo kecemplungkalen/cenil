@@ -19,7 +19,10 @@ class Content extends CI_Controller {
 		{
 			$sortName = $this->input->post('sortName');
 		}
-		
+		if($this->input->post('sortValue'))
+		{
+			$shortValue = $this->input->post('sortValue');
+		}
 		
 		if($this->input->post('search'))
 		{
@@ -53,7 +56,6 @@ class Content extends CI_Controller {
 		$config['per_page'] = $limit;
 		$this->pagination->initialize($config);
 		return $this->pagination->create_links();
-		
 	}
 
 	function _inbox($offset=false,$load=false,$searchValue=false)
