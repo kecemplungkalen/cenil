@@ -1,7 +1,9 @@
-<div class="span12" style="margin-left:16%">
-	<script>
-		$('tr').popover();
-	</script>
+<div class="span12">
+	<form class="form-search pull-right" id="formInboxSearch" >
+	  <input type="text" name="search" id="inboxSearch" class="input-medium search-query">
+	  <button type="submit" class="btn">Search</button>
+	</form>
+
 	<table class="table table-hover">
 
 	    <thead>
@@ -79,3 +81,6 @@
 	    </tbody>
 	</table>
 </div>
+<script>
+	$('tr').popover();
+</script>

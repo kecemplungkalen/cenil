@@ -5,25 +5,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         {
                 parent::__construct();
         }
-
-		function gets($limit=false,$start=false,$keyword=false)
-		{
-			if($limit)
-			{
-				$this->db->limit($limit,$start);
+        
+        
+        	function gets($limit=false,$offset=false,$search=false){
+			if($search){
+				$this->db->or_like($search);
 			}
-			
-			if($keyword)
-			{
-				
+			if($limit){
+				$query = $this->db->get('inbox',$limit,$offset);
+			}else{
+				$query = $this->db->get('inbox');
 			}
-			$get = $this->db->get('inbox');
-			log_message('error',print_r($this->db->last_query(),true));
-			if($get->num_rows() > 0)
-			{
-				return $get->result();
+			if($query->num_rows() > 0){
+				return $query->result();
 			}
-			
 			return false;
 		}
 		

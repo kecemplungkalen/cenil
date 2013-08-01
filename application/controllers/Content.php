@@ -9,8 +9,26 @@ class Content extends CI_Controller {
         }
 
     
-	function load(){
+	function load($offset=false){
 		
+		$loadMenu = false;
+		$search = false;
+		$load = false;
+		
+		if($this->input->post('sortName'))
+		{
+			$sortName = $this->input->post('sortName');
+		}
+		
+		
+		if($this->input->post('search'))
+		{
+			$search = $this->input->post('search');
+		}
+		if($this->input->post('load'))
+		{
+			$load = true;
+		}
 		$loadMenu = $this->input->post('loadMenu');
 		if($loadMenu)
 		{
@@ -18,19 +36,66 @@ class Content extends CI_Controller {
 			if(method_exists($this,$loadMenu))
 			{
 				
-			    return $this->$loadMenu();
+			    return $this->$loadMenu($offset,$load,$search);
 			}
 			
 		}
 		return false;
 	}
-
-	function _inbox()
+	
+	// pagination //
+	function _pagination($limit=false,$totalrows=false,$offset=false)
 	{
+		$this->load->library('pagination');
+		$config['uri_segment'] = $this->uri->total_segments();
+		$config['base_url'] = base_url().'content/load/';
+		$config['total_rows'] = $totalrows;
+		$config['per_page'] = $limit;
+		$this->pagination->initialize($config);
+		return $this->pagination->create_links();
+		
+	}
+
+	function _inbox($offset=false,$load=false,$searchValue=false)
+	{
+		$search = false;
 		$data = false;
+		$limit = 10;
 		$data['inbox'] = false;
+		$data['load'] = false;
+		$data['sortName'] = false;
+		$data['sortValue'] = false;
+		if($load)
+		{
+			$data['load'] = true;
+		}
+		$data['pagination'] = false;
+		if($searchValue)
+		{
+			$search['SenderNumber'] = $searchValue ;
+			$search['TextDecoded']  = $searchValue;
+			$search['RecipientID'] = $searchValue;
+		}
+		
+		// fais code :D
+		# check short name
+		if($this->input->post('sortName')){
+			if(trim($this->input->post('sortName')) != ''){
+				$data['sortName'] = $this->input->post('sortName');
+				$sort['name'] = $this->input->post('sortName');
+			}
+		}
+		# check short value
+		if($this->input->post('sortValue')){
+			if(trim($this->input->post('sortValue')) != ''){
+				$data['sortValue'] = $this->input->post('sortValue');
+				$sort['value'] = $this->input->post('sortValue');
+			}
+		}
 		$this->load->model('Inbox_model');
-		$datainbox = $this->Inbox_model->gets();
+		$total_rows = count($this->Inbox_model->gets($search));
+		$data['pagination'] = $this->_pagination($limit,$total_rows,$offset);
+		$datainbox = $this->Inbox_model->gets($limit,$offset,$search);
 		if($datainbox)
 		{
 			$data['inbox'] = $datainbox;

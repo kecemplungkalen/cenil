@@ -15,11 +15,11 @@
 		</marquee>
 	</div>
 
-		<div class="row-fluid">
+		<div class="row">
 			    <div class="span2" style="position: fixed;" >
 					    <?php if($sidebar){ echo $sidebar;}?>
 			    </div>
-			    <div class="span10" >
+			    <div class="span11 offset2" >
 				    <div id="content" class="row-fluid">
 					    <?php if($content){ echo $content;}?>
 				    </div>
