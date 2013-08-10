@@ -134,12 +134,28 @@ class Content extends CI_Controller {
 	}
 	
 	
-	function _sent()
+	function _sent($offset=false,$load=false,$searchValue=false)
 	{
-		$data = false;
-		$data['sentitems'] = false;
 		$this->load->model('Sentitems_model');
-		$dataoutbox = $this->Sentitems_model->gets();
+		$search = false;
+
+		$limit = 10;
+		//$data = false;
+		$data['sentitems'] = false;
+		$data['load'] = false;
+		if($load)
+		{
+			$data['load'] = true;
+		}
+		if($searchValue)
+		{
+			$search['SenderNumber'] = $searchValue ;
+			$search['TextDecoded']  = $searchValue;
+			$search['RecipientID'] = $searchValue;
+		}
+		$total_rows = count($this->Sentitems_model->gets(false,false,$search));
+		$dataoutbox =  $this->Sentitems_model->gets($limit,$offset,$search);
+		$data['pagination'] = $this->_pagination($limit,$total_rows,$offset);
 		if($dataoutbox)
 		{
 			$data['sentitems'] = $dataoutbox;

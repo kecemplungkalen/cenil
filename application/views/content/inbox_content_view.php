@@ -77,7 +77,7 @@
 			$(".pagination a").click(function(){
 				var load = true;
 				var url = $(this).attr("href");
-				if(url !== '#'){
+				if(url != undefined){
 					var search = $('#inboxSearch').val();
 					$.ajax({
 						type	: "POST",
