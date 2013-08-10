@@ -12,8 +12,20 @@ $(document).ready(function(){
 				$('#content').html(data);
 		    });
 	}
-    });
-    
-   
-    
-});	
+    });    
+});
+
+	function getconfig(configType,data){
+	    
+		$.post(baseURL+'config_modal/getconfig',{configType:configType,data:data},function(data){
+		    
+			if(data != -1)
+			{
+				console.log(data);
+				$('#modalArea').html(data);
+				$('#configModal').modal('show');
+			}
+		    
+		});
+	    
+	}

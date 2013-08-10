@@ -26,9 +26,9 @@
 			    <th>
 				    Signal
 			    </th>
-<!--			    <th>
+			    <th>
 				    Action
-			    </th>-->
+			    </th>
 		    </tr>
 	    </thead>
 	    
@@ -72,9 +72,9 @@
 						    <span><i class="icon-signal"></i></span> <?php echo $phone[$i]['Signal'];?>
 					</td> 
 					
-<!--					<td>
-						<a class="btn btn-mini" id="sikat_"> <?php //echo $pn->ID;?>Sikat</a>
-					</td>-->
+					<td>
+						<a class="btn btn-mini btn-primary" id="sikat_" data-IMEI="<?php echo $phone[$i]['IMEI'];?>" onclick="getconfig('_phoneModal','<?php echo $phone[$i]['IMEI'];?>')"><i class="icon-wrench icon-white"></i> Config </a>
+					</td>
 				</tr>
 			<?php }?>
 		<?php } ?>

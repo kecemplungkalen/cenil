@@ -29,6 +29,7 @@
 			    
 			    <th>
 				    Sent Status 
+<!-- 				    'SendingOK','SendingOKNoReport','SendingError','DeliveryOK','DeliveryFailed','','DeliveryUnknown','Error' -->
 			    </th>
 			    
 		    </tr>
@@ -57,7 +58,16 @@
 						    <?php echo $sent->SenderID;?>
 					</td>
 					<td>
-						    <?php echo $sent->Status;?>
+						    <?php if(($sent->Status == 'SendingOK') || ($sent->Status == 'SendingOKNoReport')){?>
+							    <span class="label label-success"><?php echo $sent->Status;?></span>
+						    <?php } ?>
+						    <?php if(($sent->Status == 'SendingError') || ($sent->Status == 'DeliveryFailed')|| ($sent->Status == 'Error')){?>
+							    <span class="label label-important"><?php echo $sent->Status;?></span>
+						    <?php } ?>
+						    <?php if(($sent->Status == 'DeliveryPending') || ($sent->Status == 'DeliveryUnknown')){?>
+							    <span class="label"><?php echo $sent->Status;?></span>
+						    <?php } ?>
+						    
 					</td>
 				</tr>
 			<?php }?>

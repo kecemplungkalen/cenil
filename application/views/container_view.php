@@ -26,6 +26,6 @@
 			    </div>
 		</div>
 	</div>
-
-
+	<div id="modalArea">
+	</div>
 </body>
