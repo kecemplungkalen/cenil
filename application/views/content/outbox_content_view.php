@@ -1,7 +1,7 @@
 <?php if(!$load){?>
 <div class="span12">
 	<form class="form-search pull-right" id="formInboxSearch" >
-	  <input type="text" name="search" id="inboxSearch" class="input-medium search-query">
+	  <input type="text" name="search" id="boxSearch" class="input-medium search-query">
 	  <button type="submit" class="btn">Search</button>
 	</form>
 	<div id="outboxTable">
@@ -73,6 +73,51 @@
 	   <div id="paging">
 		   <?php echo $pagination;?>
 	   </div>
+	   
+<script type="text/javascript">
+		function applyPagination(){
+			$("#paging a").click(function(){
+				var load = true;
+				var url = $(this).attr("href");
+				if(url !== '#'){
+					var search = $('#boxSearch').val();
+					$.ajax({
+						type	: "POST",
+						data	: "load="+load+"&loadMenu=_outbox&search="+search,
+						url	: url,
+						success	: function(msg) {
+								$("#outboxTable").html(msg).hide().fadeIn(300);
+								applyPagination();
+							}
+					});
+				}
+				return false;
+			});
+		}
+		
+		<?php if(!$load){ ?>
+			$(document).ready(function(){
+				$('#formInboxSearch').submit(function(event){
+					event.preventDefault();
+					var searchValue = $('#boxSearch').val();
+					$.post(baseURL+'content/load',{search:searchValue,loadMenu:'_outbox',load:true},function(data){
+					
+						$("#outboxTable").html(data).hide().fadeIn(300);
+					
+					});
+					applyPagination();
+				
+				});
+				applyPagination();
+			});
+		<?php } ?>
+	
+</script>	   
+	   
+	   
+	   
+	   
+	   
 <?php if(!$load){?>
 </div>
 	<script>

@@ -10,17 +10,22 @@
 				    #
 			    </th>
 			    <th>
-				    DestinationNumber
+				    Destination Number
 			    </th>
 			    <th>
-				    TextDecoded 
+				    Text Decoded 
 			    </th>
 			    <th>
-				    SendingDateTime
+				    Sending DateTime
 			    </th>
 			    <th>
-				    SenderID
+				    Sender ID
 			    </th>
+			    
+			    <th>
+				    Sent Status 
+			    </th>
+			    
 		    </tr>
 	    </thead>
 	    
@@ -45,6 +50,9 @@
 					
 					<td>
 						    <?php echo $sent->SenderID;?>
+					</td>
+					<td>
+						    <?php echo $sent->Status;?>
 					</td>
 				</tr>
 			<?php }?>
