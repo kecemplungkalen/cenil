@@ -1,10 +1,11 @@
+<?php if(!$load){?>
 <div class="span12">
 	<form class="form-search pull-right" id="formInboxSearch" >
 	  <input type="text" name="search" id="inboxSearch" class="input-medium search-query">
 	  <button type="submit" class="btn">Search</button>
 	</form>
-	
-	
+	<div id="outboxTable">
+<?php } ?>	
 	<table class="table table-hover">
 
 	    <thead>
@@ -27,9 +28,9 @@
 			    <th>
 				    CreatorID
 			    </th>
-<!--			    <th>
-				    Action
-			    </th>-->
+			    <th>
+				    SendingTimeOut
+			    </th>
 		    </tr>
 	    </thead>
 	    
@@ -61,16 +62,19 @@
 					<td>
 						    <?php echo $obx->CreatorID;?>
 					</td>
-<!--					
 					<td>
-					<a href="#" id="status" data-mode="popup"  data-type="select" data-pk="<?php echo $obx->ID;?>" data-value="3"  data-placement="left" data-original-title="Select status" class="btnAction  editable-click"></a>
-					</td>-->
+						    <?php echo $obx->SendingTimeOut;?>
+					</td>
 				</tr>
 			<?php }?>
 		<?php } ?>
 	    </tbody>
 	</table>
-	
+	   <div id="paging">
+		   <?php echo $pagination;?>
+	   </div>
+<?php if(!$load){?>
+</div>
 	<script>
 		$(document).ready(function(){
 		
@@ -87,3 +91,4 @@
 		});
 	</script>
 </div>
+<?php } ?>

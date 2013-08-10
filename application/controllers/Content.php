@@ -105,12 +105,27 @@ class Content extends CI_Controller {
 		return $this->load->view('content/inbox_content_view',$data);
 	}
     
-	function _outbox()
+	function _outbox($offset=false,$load=false,$searchValue=false)
 	{
-		$data = false;
-		$data['outbox'] = false;
 		$this->load->model('Outbox_model');
-		$dataoutbox = $this->Outbox_model->gets();
+		$data = false;
+		$search = false;
+		$data['load'] = false;
+		$limit = 10;
+		$total_rows = count($this->Outbox_model->gets());
+		if($load)
+		{
+			$data['load'] = true;
+		}
+		if($searchValue)
+		{
+			$search['SenderNumber'] = $searchValue ;
+			$search['TextDecoded']  = $searchValue;
+			$search['RecipientID'] = $searchValue;
+		}
+		$data['pagination'] = $this->_pagination($limit,$total_rows,$offset);
+		$data['outbox'] = false;
+		$dataoutbox  = $this->Outbox_model->gets($limit,$offset,$search);
 		if($dataoutbox)
 		{
 			$data['outbox'] = $dataoutbox;

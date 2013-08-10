@@ -17,10 +17,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			if($keyword)
 			{
-				
+				$this->db->or_like($keyword);
 			}
 			$get = $this->db->get('outbox');
-			log_message('error',print_r($this->db->last_query(),true));
 			if($get->num_rows() > 0)
 			{
 				return $get->result();
