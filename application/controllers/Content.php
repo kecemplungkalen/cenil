@@ -1,7 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Content extends CI_Controller {
+class Content extends MY_Controller {
     
         public function __construct()
         {
@@ -112,17 +112,18 @@ class Content extends CI_Controller {
 		$search = false;
 		$data['load'] = false;
 		$limit = 10;
-		$total_rows = count($this->Outbox_model->gets());
 		if($load)
 		{
 			$data['load'] = true;
 		}
 		if($searchValue)
 		{
-			$search['SenderNumber'] = $searchValue ;
+			$search['DestinationNumber'] = $searchValue ;
 			$search['TextDecoded']  = $searchValue;
-			$search['RecipientID'] = $searchValue;
+			$search['SenderID'] = $searchValue;
+			$search['CreatorID'] = $searchValue;
 		}
+		$total_rows = count($this->Outbox_model->gets(false,false,$search));
 		$data['pagination'] = $this->_pagination($limit,$total_rows,$offset);
 		$data['outbox'] = false;
 		$dataoutbox  = $this->Outbox_model->gets($limit,$offset,$search);
@@ -149,9 +150,10 @@ class Content extends CI_Controller {
 		}
 		if($searchValue)
 		{
-			$search['SenderNumber'] = $searchValue ;
+			$search['DestinationNumber'] = $searchValue ;
 			$search['TextDecoded']  = $searchValue;
-			$search['RecipientID'] = $searchValue;
+			$search['SenderID'] = $searchValue;
+			$search['CreatorID'] = $searchValue;
 		}
 		$total_rows = count($this->Sentitems_model->gets(false,false,$search));
 		$dataoutbox =  $this->Sentitems_model->gets($limit,$offset,$search);

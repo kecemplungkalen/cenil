@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			if($keyword)
 			{
-				
+				$this->db->or_like($keyword);
 			}
 			$get = $this->db->get('sentitems');
 			log_message('error',print_r($this->db->last_query(),true));

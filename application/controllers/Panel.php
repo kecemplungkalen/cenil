@@ -1,6 +1,6 @@
 <?php 
 
-Class Panel extends CI_Controller{
+Class Panel extends MY_Controller{
     
 
 	public function index()

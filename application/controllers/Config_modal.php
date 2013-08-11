@@ -1,7 +1,7 @@
  <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Config_modal extends CI_Controller {
+class Config_modal extends MY_Controller {
     
     function getconfig()
     {

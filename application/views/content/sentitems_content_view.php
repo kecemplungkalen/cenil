@@ -1,7 +1,7 @@
 <?php if(!$load){?>
 	<div class="span12">
 		<form class="form-search pull-right" id="formInboxSearch" >
-		  <input type="text" name="search" id="inboxSearch" class="input-medium search-query">
+		  <input type="text" name="search" id="boxSearch" class="input-medium search-query">
 		  <button type="submit" class="btn">Search</button>
 		</form>
 			<div id="sentTable">
